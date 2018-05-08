@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
+import { Button } from 'semantic-ui-react';
 import { SignUpLink } from './SignUp';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
@@ -11,6 +12,9 @@ const SignInPage = ({ history }) =>
     <SignInForm history={history} />
     <SignUpLink />
   </div>
+
+const ButtonExampleButton = () =>
+  <Button>Click Here</Button>
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -63,25 +67,28 @@ class SignInForm extends Component {
       email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          value={email}
-          onChange={event => this.setState(byPropKey('email', event.target.value))}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          value={password}
-          onChange={event => this.setState(byPropKey('password', event.target.value))}
-          type="password"
-          placeholder="Password"
-        />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
+      <div className="ui inverted segment">
+        <form onSubmit={this.onSubmit}>
+          <input
+            value={email}
+            onChange={event => this.setState(byPropKey('email', event.target.value))}
+            type="text"
+            placeholder="Email Address"
+          />
+          <input
+            value={password}
+            onChange={event => this.setState(byPropKey('password', event.target.value))}
+            type="password"
+            placeholder="Password"
+          />
+          <button disabled={isInvalid} type="submit">
+            Sign In
+          </button>
 
-        { error && <p>{error.message}</p> }
-      </form>
+          { error && <p>{error.message}</p> }
+        </form>
+          <ButtonExampleButton/>
+      </div>
     );
   }
 }
